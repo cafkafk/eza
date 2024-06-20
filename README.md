@@ -111,6 +111,7 @@ eza’s options are almost, but not quite, entirely unlike `ls`’s. Quick overv
 - **-D**, **--only-dirs**: list only directories
 - **-f**, **--only-files**: list only files
 - **--git-ignore**: ignore files mentioned in `.gitignore`
+- **--ignore-submodule-contents**: do not list contents of submodules
 - **-I**, **--ignore-glob=(globs)**: glob patterns (pipe-separated) of files to ignore
 
 Pass the `--all` option twice to also show the `.` and `..` directories.

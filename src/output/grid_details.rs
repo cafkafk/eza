@@ -80,6 +80,9 @@ pub struct Render<'a> {
     pub console_width: usize,
 
     pub git_repos: bool,
+
+    /// Whether we are skipping recursing into submodules.
+    pub ignoring_submodule_contents: bool,
 }
 
 impl<'a> Render<'a> {
@@ -102,6 +105,7 @@ impl<'a> Render<'a> {
             git_ignoring:  self.git_ignoring,
             git:           self.git,
             git_repos:     self.git_repos,
+            ignoring_submodule_contents: self.ignoring_submodule_contents,
         };
     }
 
@@ -123,6 +127,7 @@ impl<'a> Render<'a> {
             self.filter.dot_filter,
             self.git,
             self.git_ignoring,
+            self.ignoring_submodule_contents,
             None,
         );
 

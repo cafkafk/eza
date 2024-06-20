@@ -27,6 +27,7 @@ impl FileFilter {
         #[rustfmt::skip]
         return Ok(Self {
             list_dirs_first:  matches.has(&flags::DIRS_FIRST)?,
+            ignore_submodule_contents: matches.has(&flags::IGNORE_SUBMODULE_CONTENTS)?,
             flags: filter_flags,
             sort_field:       SortField::deduce(matches)?,
             dot_filter:       DotFilter::deduce(matches)?,

@@ -143,6 +143,8 @@ commands:
       - "*.toml"
   ? - null
     - --git-ignore
+  ? - null
+    - --ignore-submodule-contents
 
   # Long View Options
   ? - -b

@@ -68,6 +68,9 @@ pub struct FileFilter {
 
     /// Whether to ignore Git-ignored patterns.
     pub git_ignore: GitIgnore,
+
+    /// Whether to ignore submodule contents when listing recursively.
+    pub ignore_submodule_contents: bool,
 }
 
 impl FileFilter {

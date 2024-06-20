@@ -138,6 +138,9 @@ pub struct Render<'a> {
     pub git: Option<&'a GitCache>,
 
     pub git_repos: bool,
+
+    /// Whether we are skipping recursing into submodules.
+    pub ignoring_submodule_contents: bool,
 }
 
 #[rustfmt::skip]
@@ -165,6 +168,7 @@ impl<'a> Render<'a> {
             self.filter.dot_filter,
             self.git,
             self.git_ignoring,
+            self.ignoring_submodule_contents,
             self.recurse,
         );
 
@@ -286,7 +290,16 @@ impl<'a> Render<'a> {
 
                 let mut dir = None;
                 if let Some(r) = self.recurse {
-                    if file.is_directory() && r.tree && !r.is_too_deep(depth.0) {
+                    if file.is_directory()
+                        && r.tree
+                        && !r.is_too_deep(depth.0)
+                        && !(self.ignoring_submodule_contents
+                            && self
+                                .git
+                                .as_ref()
+                                .map(|g| g.has_in_submodule(&file.path))
+                                .unwrap_or(false))
+                    {
                         trace!("matching on to_dir");
                         match file.to_dir() {
                             Ok(d) => {
